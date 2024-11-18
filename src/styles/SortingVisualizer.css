@@ -1,0 +1,59 @@
+body {
+  background: linear-gradient(45deg, #f3f4f5, #e2e8f0);  /* Soft gradient */
+  font-family: 'Arial', sans-serif;  /* Set a clean font */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.visualizer-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 20px;
+  height: 300px; /* Adjust depending on the size of the bars */
+  width: 100%;  /* Make it responsive */
+}
+
+button, select, input {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+button:disabled {
+  background-color: #BDC3C7;  /* Light gray for disabled buttons */
+}
+
+.bar {
+  width: 30px;  /* Fixed width for each bar */
+  margin: 0 2px;  /* Add some space between bars */
+  background-color: steelblue;  /* Default bar color */
+  border-radius: 4px;  /* Round the corners slightly */
+  transition: height 0.2s ease, background-color 0.2s ease;  /* Smooth transition */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.loading {
+  border: 8px solid #f3f3f3;  /* Light gray */
+  border-top: 8px solid #3498db;  /* Blue spinner */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
