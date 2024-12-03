@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(45deg, #f3f4f5, #e2e8f0);  /* Soft gradient */
-  font-family: 'Arial', sans-serif;  /* Set a clean font */
+  font-family: 'Arial', sans-serif; 
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,13 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/SortingVisualizer.css';
-import { bubbleSort, selectionSort, insertionSort, mergeSort, quickSort } from '../algorithms/SortingAlgorithms.js';
+import { bubbleSort, selectionSort, insertionSort, mergeSort, quickSort } from '../sorting-algorithms/SortingAlgorithms.js';
+import { getBubbleSortActions } from '../sorting-algorithms/bubbleSort.js';
+import { animateSorting } from '../animations/animations.js';
 
 const SortingVisualizer = () => {
   const [array, setArray] = useState([]);
   const [comparingIndices, setComparingIndices] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubbleSort');
-  const [speed, setSpeed] = useState(100);
+  const [speed, setSpeed] = useState(500);
   const [isSorting, setIsSorting] = useState(false); // New state for tracking sorting
+  const speedRef = React.useRef(500);
+  const MAX_DELAY = 5000; // Maximum delay in milliseconds
+
+  const handleSpeedChange = (e) => {
+    const sliderValue = Number(e.target.value); // Slider value
+    const newSpeed = MAX_DELAY - sliderValue; // Inverted logic
+    setSpeed(newSpeed); // Update speed state
+    speedRef.current = newSpeed; // Update ref for animations
+  };
 
   // Memoize the function to prevent it from being recreated on each render
   const generateRandomArray = useCallback(() => {
@@ -24,9 +35,11 @@ const SortingVisualizer = () => {
     if (isSorting) return;  // Prevent multiple sorts
     setIsSorting(true);
 
+    let actions;
+
     switch (selectedAlgorithm) {
       case 'bubbleSort':
-        await bubbleSort(array, setArray, setComparingIndices, () => speed);  // Passing speed dynamically
+        actions = getBubbleSortActions(array);  // Passing speed dynamically
         break;
       case 'selectionSort':
         await selectionSort(array, setArray, setComparingIndices, () => speed);
@@ -42,6 +55,10 @@ const SortingVisualizer = () => {
         break;
       default:
         break;
+    }
+
+    if (actions) {
+      await animateSorting(actions, setArray, setComparingIndices, () => speedRef.current);
     }
 
     setIsSorting(false); // Reset sorting state after completion
@@ -64,9 +81,9 @@ const SortingVisualizer = () => {
         type="range"
         min="10"
         max="1000"
-        step="10"
-        value={speed}
-        onChange={(e) => setSpeed(Number(e.target.value))}
+        step="100"
+        value={MAX_DELAY - speed}
+        onChange={handleSpeedChange}
       />
 
       <button onClick={handleSort} disabled={isSorting}>Start Sorting</button>
