@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(45deg, #f3f4f5, #e2e8f0);  /* Soft gradient */
+  background: linear-gradient(to top, #333, #e2e8f0);  /* Soft gradient */
   font-family: 'Arial', sans-serif; 
   display: flex;
   justify-content: center;
@@ -12,6 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  border: 2px solid black;
   margin-top: 20px;
   height: 300px; /* Adjust depending on the size of the bars */
   width: 100%;  /* Make it responsive */
@@ -35,7 +36,7 @@ button:disabled {
 .bar {
   width: 30px;  /* Fixed width for each bar */
   margin: 0 2px;  /* Add some space between bars */
-  background-color: steelblue;  /* Default bar color */
+  background: linear-gradient(#333, white);  /* Default bar color */
   border-radius: 4px;  /* Round the corners slightly */
   transition: height 0.2s ease, background-color 0.2s ease;  /* Smooth transition */
 }

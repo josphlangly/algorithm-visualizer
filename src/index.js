@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { bubbleSort } from './sorting-algorithms/bubbleSort';
+import { selectionSort } from './sorting-algorithms/selectionSort';
+import { insertionSort } from './sorting-algorithms/insertionSort';
+import { mergeSort } from './sorting-algorithms/mergeSort';
+import { quickSort } from './sorting-algorithms/quickSort';
+
+export { bubbleSort, selectionSort, insertionSort, mergeSort, quickSort };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
